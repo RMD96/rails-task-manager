@@ -1,0 +1,11 @@
+<div class="mx-auto" style="width: 200px;">
+
+<h1> Task: <%=  @task.title %> </h1>
+<p> <%=  @task.details %> </p>
+<p> Completed? <%= @task.completed ? '<i class="fa-solid fa-check"></i>'.html_safe : '<i class="fa-solid fa-xmark"></i>'.html_safe %> </p>
+
+<%= link_to "Delete",task_path(@task), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete?"}, class: 'btn btn-danger' %>
+<%= link_to 'Go back', tasks_path, class: 'btn btn-secondary'%>
+<%= link_to 'Edit Task', tasks_edit_path(@task), class: "btn btn-warning" %>
+
+</div>

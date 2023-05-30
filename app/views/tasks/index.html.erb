@@ -1,0 +1,12 @@
+<div class="container mt-5" style="width: 200px;">
+    <h1> All tasks</h1>
+
+    <ul>
+    <% @tasks.each do |task| %>
+        <li class="text-decoration-none"> <%= task.completed ? '<i class="fa-solid fa-check"></i>'.html_safe : '<i class="fa-solid fa-xmark"></i>'.html_safe %> <%= link_to task.title, task_path(task) %> </li>
+    <% end %>
+    </ul>
+
+    <%= link_to 'Add a new task', tasks_new_path, class: 'btn btn-primary'%>
+
+</div>
