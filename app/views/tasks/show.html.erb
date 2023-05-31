@@ -1,11 +1,43 @@
-<div class="mx-auto" style="width: 200px;">
-
-<h1> Task: <%=  @task.title %> </h1>
-<p> <%=  @task.details %> </p>
-<p> Completed? <%= @task.completed ? '<i class="fa-solid fa-check"></i>'.html_safe : '<i class="fa-solid fa-xmark"></i>'.html_safe %> </p>
-
-<%= link_to "Delete",task_path(@task), data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete?"}, class: 'btn btn-danger' %>
-<%= link_to 'Go back', tasks_path, class: 'btn btn-secondary'%>
-<%= link_to 'Edit Task', tasks_edit_path(@task), class: "btn btn-warning" %>
-
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">Task: <%= @task.title %></h2>
+          <p class="card-text"><%= @task.details %></p>
+          <p class="card-text">
+            <span id="status-icon" class="<%= @task.completed ? 'completed' : 'not-completed' %>">
+              <i id="status-toggle" class="fas <%= @task.completed ? 'fa-check'.html_safe : 'fa-times'.html_safe %>"></i>
+            </span>
+          </p>
+        </div>
+        <div class="card-footer">
+          <%= link_to "Delete", task_path(@task), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete?" }, class: 'btn btn-danger' %>
+          <%= link_to 'Go back', tasks_path, class: 'btn btn-secondary' %>
+          <%= link_to 'Edit Task', tasks_edit_path(@task), class: "btn btn-warning" %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const statusToggle = document.getElementById("status-toggle");
+    const statusIcon = document.getElementById("status-icon");
+
+    statusToggle.addEventListener("click", function() {
+      if (statusIcon.classList.contains("completed")) {
+        statusIcon.classList.remove("completed");
+        statusIcon.classList.add("not-completed");
+        statusToggle.classList.remove("fa-check");
+        statusToggle.classList.add("fa-times");
+      } else {
+        statusIcon.classList.remove("not-completed");
+        statusIcon.classList.add("completed");
+        statusToggle.classList.remove("fa-times");
+        statusToggle.classList.add("fa-check");
+      }
+    });
+  });
+</script>

@@ -1,15 +1,30 @@
-<div class="mx-auto" style="width: 200px;">
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <%= form_with model: @task do |f| %>
+        <h2 class="text-center mb-4">Edit Task</h2>
 
-<%= form_with model: @task do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-  <%= f.label :details %>
-  <%= f.text_field :details %>
-  <%= f.label :completed %>
-  <%= f.check_box :completed %>
-  <%= f.submit %>
-<% end %>
+        <div class="form-group">
+          <%= f.label :title %>
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
 
-<button type="button" class="btn btn-secondary"><%= link_to 'Go back', tasks_path %></button>
+        <div class="form-group">
+          <%= f.label :details %>
+          <%= f.text_area :details, class: "form-control" %>
+        </div>
 
+        <div class="form-group form-check">
+          <%= f.label :completed, class: "form-check-label" do %>
+            <%= f.check_box :completed, class: "form-check-input" %>
+            Completed
+          <% end %>
+        </div>
+
+        <%= f.submit "Update Task", class: "btn btn-primary btn-block mt-4" %>
+      <% end %>
+
+      <%= link_to "Go back", tasks_path, class: "btn btn-secondary btn-block mt-2" %>
+    </div>
+  </div>
 </div>
